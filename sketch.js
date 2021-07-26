@@ -10,12 +10,8 @@ var computer, computerBase;
 
 //Declare an array for arrows playerArrows = [ ]
 var playerArrows = [];
-var computerArrows = []
-var arrow;
 
-function preload(){
-  backgroundImg = loadImage("assets/background.gif")
-}
+var arrow;
 
 
 function setup() {
@@ -51,14 +47,14 @@ function setup() {
     120,
     120
   );
-  //Function to manage computer Arrows
-  handleComputerArcher(); 
+  
+ 
 
 
 }
 
 function draw() {
-  background(backgroundImg);
+  background(180);
 
   Engine.update(engine);
 
@@ -83,13 +79,6 @@ function draw() {
  for (var i = 0; i < playerArrows.length; i++) {
   showArrows(i, playerArrows);
 }
-
-for (var i = 0; i < computerArrows.length; i++) {
-  showArrows(i, computerArrows);
-}
-
-
-//Call functions to detect collision for player and computer
 
 }
 
@@ -130,43 +119,3 @@ function showArrows(index, arrows) {
  
 
 }
-
-function handleComputerArcher() {
-  if (!computerArcher.collapse && !playerArcher.collapse) {
-    setTimeout(() => {
-      var pos = computerArcher.body.position;
-      var angle = computerArcher.body.angle;
-      var moves = ["UP", "DOWN"];
-      var move = random(moves);
-      var angleValue;
-
-      if (move === "UP") {
-        angleValue = 0.1;
-      } else {
-        angleValue = -0.1;
-      }
-      angle += angleValue;
-
-      var arrow = new ComputerArrow(pos.x, pos.y, 100, 10, angle);
-
-      Matter.Body.setAngle(computerArcher.body, angle);
-      Matter.Body.setAngle(computerArcher.body, angle);
-
-      computerArrows.push(arrow);
-      setTimeout(() => {
-        computerArrows[computerArrows.length - 1].shoot(angle);
-      }, 100);
-
-      handleComputerArcher();
-    }, 2000);
-  }
-}
-
-function handlePlayerArrowCollision() {
-// Write code to detect collision between player arrow and opponent
-}
-
-function handleComputerArrowCollision() {
-  //Write code to detect collision between computer arrow and opponent
-}
-
